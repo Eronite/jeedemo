@@ -1,4 +1,5 @@
 <%@ page pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +7,8 @@
 <title>Affichage commande</title>
 </head>
 <body>
-	<p>Nom : ${ order.client.name }</p>
-	<p>Date : ${ order.date }</p>
+	<c:import url="/inc/menu.jsp" />
+	<p>Nom : <c:out value="${ order.client.name }"/></p>
+	<p>Date : <c:out value="${ order.date }"/></p>
 </body>
 </html>

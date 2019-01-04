@@ -16,7 +16,7 @@
 			</fieldset>
 			<fieldset>
 				<legend>Informations commande</legend>
-				<label for="orderDate">Date" : </label>
+				<label for="orderDate">Date : </label>
 				<input type="text" id="orderDate" name="orderDate"/>
 			</fieldset>
 			<input type="submit" value="Valider"/>

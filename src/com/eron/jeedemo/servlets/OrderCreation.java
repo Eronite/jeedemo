@@ -17,6 +17,13 @@ import com.eron.jeedemo.beans.Order;
 public class OrderCreation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	public static final String NAME_FIELD = "clientName";
+	public static final String DATE_FIELD = "orderDate";
+	
+	public static final String ORDER_ATTRIBUTE = "order";
+	
+	public static final String VIEW = "/displayOrder.jsp";
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -35,8 +42,8 @@ public class OrderCreation extends HttpServlet {
 		// DateTime dateTime = new DateTime();
 		
 		// get params
-		String name = request.getParameter("clientName");
-		String date = request.getParameter("orderDate");
+		String name = request.getParameter(NAME_FIELD);
+		String date = request.getParameter(DATE_FIELD);
 		
 		// create beans
 		Client client = new Client();
@@ -47,9 +54,9 @@ public class OrderCreation extends HttpServlet {
 		order.setDate(date);
 		
 		// add bean to request object
-		request.setAttribute("order", order);
+		request.setAttribute(ORDER_ATTRIBUTE, order);
 		
-		this.getServletContext().getRequestDispatcher("/displayOrder.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
 
 }

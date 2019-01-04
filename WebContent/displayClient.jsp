@@ -1,4 +1,5 @@
 <%@ page pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +7,7 @@
 <title>Affichage client</title>
 </head>
 <body>
-	<p>Nom : ${ client.name }</p>
+	<c:import url="/inc/menu.jsp" />
+	<p>Nom : <c:out value="${ client.name }"/></p>
 </body>
 </html>
