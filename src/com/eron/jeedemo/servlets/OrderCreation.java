@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.eron.jeedemo.beans.Client;
+import com.eron.jeedemo.forms.OrderCreationForm;
 import com.eron.jeedemo.beans.Order;
 
 /**
@@ -17,12 +17,14 @@ import com.eron.jeedemo.beans.Order;
 public class OrderCreation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	public static final String NAME_FIELD = "clientName";
-	public static final String DATE_FIELD = "orderDate";
+	//public static final String NAME_FIELD = "clientName";
+	//public static final String DATE_FIELD = "orderDate";
 	
 	public static final String ORDER_ATTRIBUTE = "order";
+	public static final String FORM_ATTRIBUTE = "form";
 	
-	public static final String VIEW = "/displayOrder.jsp";
+	public static final String SUCCESS_VIEW = "/WEB-INF/displayOrder.jsp";
+	public static final String FORM_VIEW = "/WEB-INF/createOrder.jsp";
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,26 +39,28 @@ public class OrderCreation extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
+		// GET : display form :
 		
-		// DateTime dateTime = new DateTime();
-		
-		// get params
-		String name = request.getParameter(NAME_FIELD);
-		String date = request.getParameter(DATE_FIELD);
-		
-		// create beans
-		Client client = new Client();
-		client.setName(name);
-		
-		Order order = new Order();
-		order.setClient(client);
-		order.setDate(date);
-		
-		// add bean to request object
-		request.setAttribute(ORDER_ATTRIBUTE, order);
-		
-		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+		this.getServletContext().getRequestDispatcher(FORM_VIEW).forward(request, response);
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/* create form object */
+        OrderCreationForm form = new OrderCreationForm();
+
+        /* Traitement de la requête et récupération du bean en résultant */
+        Order order = form.createOrder( request );
+
+        /* add bean and form object to request object */
+        request.setAttribute( ORDER_ATTRIBUTE, order );
+        request.setAttribute( FORM_ATTRIBUTE, form );
+
+        if ( form.getErrors().isEmpty() ) {
+            this.getServletContext().getRequestDispatcher( SUCCESS_VIEW ).forward( request, response );
+        } else {
+            this.getServletContext().getRequestDispatcher( FORM_VIEW ).forward( request, response );
+        }
+
+	}
+	
 }
