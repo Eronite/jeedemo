@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <title>Order</title>
-<%-- <link type="text/css" rel="stylesheet" href="inc/style.css"/> --%>
+<link type="text/css" rel="stylesheet" href="inc/style.css"/>
 </head>
 <body>
 	<div>
