@@ -9,6 +9,7 @@
 </head>
 <body>
 	<c:import url="/inc/menu.jsp" />
+	<p>${ form.result }</p>
 	<p>Nom : <c:out value="${ client.name }"/></p>
 </body>
 </html>

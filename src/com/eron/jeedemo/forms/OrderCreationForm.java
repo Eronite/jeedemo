@@ -4,13 +4,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.eron.jeedemo.beans.Client;
 import com.eron.jeedemo.beans.Order;
 
 public final class OrderCreationForm {
     private static final String DATE_FIELD            = "orderDate";
+    
+    
+    private static final String CHOICE_CLIENT_FIELD   = "choiceNewClient";
+    private static final String LIST_CLIENTS_FIELD    = "listClients";
 
+    private static final String EXISTING_CLIENT       = "existingClient";
+    private static final String CLIENTS_SESSION       = "clients";
+    
+    
     private String              result;
     private Map<String, String> errors                = new HashMap<String, String>();
 
@@ -23,18 +32,43 @@ public final class OrderCreationForm {
     }
 
     public Order createOrder( HttpServletRequest request ) {
+    	Client client;
         /*
-         * pour ne pas dupliquer l'objet Client : passer la requête courante à l'objet métier existant
-         * et récupérer l'objet Client créé
+         * Si l'utilisateur choisit un client déjà existant, pas de validation à
+         * effectuer
          */
-        ClientCreationForm clientForm = new ClientCreationForm();
-        Client client = clientForm.createClient( request );
-
-        /*
-         * récupérer le contenu de la map d'erreurs créée par l'objet métier ClientCreationForm
-         * dans la map d'erreurs courante (actuellement vide)
-         */
-        errors = clientForm.getErrors();
+        String choiceNewClient = getFieldValue( request, CHOICE_CLIENT_FIELD );
+        if ( EXISTING_CLIENT.equals( choiceNewClient ) ) {
+            /* Récupération du nom du client choisi */
+            String existingClientName = getFieldValue( request, LIST_CLIENTS_FIELD );
+            /* Récupération de l'objet client correspondant dans la session */
+            HttpSession session = request.getSession();
+            client = ( (Map<String, Client>) session.getAttribute( CLIENTS_SESSION ) ).get( existingClientName );
+        } else {
+            /*
+             * Sinon on garde l'ancien mode, pour la validation des champs.
+             * 
+             * L'objet métier pour valider la création d'un client existe déjà,
+             * il est donc déconseillé de dupliquer ici son contenu ! À la
+             * place, il suffit de passer la requête courante à l'objet métier
+             * existant et de récupérer l'objet Client créé.
+             */
+    	
+    	
+	        /*
+	         * pour ne pas dupliquer l'objet Client : passer la requête courante à l'objet métier existant
+	         * et récupérer l'objet Client créé
+	         */
+	        ClientCreationForm clientForm = new ClientCreationForm();
+	        client = clientForm.createClient( request );
+	
+	        /*
+	         * récupérer le contenu de la map d'erreurs créée par l'objet métier ClientCreationForm
+	         * dans la map d'erreurs courante (actuellement vide)
+	         */
+	        errors = clientForm.getErrors();
+	        
+        }
 
          
         String date = getFieldValue( request, DATE_FIELD );
