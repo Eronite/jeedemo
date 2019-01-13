@@ -10,6 +10,7 @@
 <body>
 	<c:import url="/inc/menu.jsp" />
 	<p>Nom : <c:out value="${ order.client.name }"/></p>
+	<p>Prénom : <c:out value="${ order.client.firstName }"/></p>
 	<p>Date : <c:out value="${ order.date }"/></p>
 </body>
 </html>

@@ -20,6 +20,7 @@
             <table>
                 <tr>
                     <th>Nom</th>
+                    <th>Prénom</th>
                     <th class="action">Action</th>                    
                 </tr>
                 <%-- Parcours de la Map des clients en session, et utilisation de l'objet varStatus. --%>
@@ -28,10 +29,11 @@
                 <tr class="${loop.index % 2 == 0 ? 'even' : 'odd'}">
                     <%-- Affichage des propriétés du bean Client, qui est stocké en tant que valeur de l'entrée courante de la map --%>
                     <td><c:out value="${ mapClients.value.name }"/></td>
+                    <td><c:out value="${ mapClients.value.firstName }"/></td>
                     <%-- Lien vers la servlet de suppression, avec passage du nom du client - c'est-à-dire la clé de la Map - en paramètre grâce à la balise <c:param/>. --%>
                     <td class="action">
                         <a href="<c:url value="/removeClient"><c:param name="clientName" value="${ mapClients.key }" /></c:url>">
-                            <img src="<c:url value="/inc/remove.png"/>" alt="Supprimer" />
+                            <img src="<c:url value="/inc/remove.png"/>" alt="Remove" />
                         </a>
                     </td>
                 </tr>

@@ -31,3 +31,30 @@ form input {
 	padding: 10px;
 	margin: 10px;
 }
+
+/* Tables -------------------------------------------------------------------------------------*/
+table{
+	border-collapse: collapse;
+}
+tr.even{
+	background-color: #efefef;
+}
+tr.odd{
+	background-color: #fff;	
+}
+th{
+	color: #0568CD;
+	border: 1px solid #0568CD;
+	padding: 5px;
+}
+th.action{
+	border: 1px solid #900;
+	color: #900;
+}
+td{
+	border: 1px solid #ddd;
+	padding: 5px;
+}
+td.action{
+	text-align: center;
+}

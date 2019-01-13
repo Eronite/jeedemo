@@ -39,7 +39,7 @@
                             <c:forEach items="${ sessionScope.clients }" var="mapClients">
                             <%--  L'expression EL ${mapClients.value} permet de cibler l'objet Client stocké en tant que valeur dans la Map, 
                                   et on cible ensuite simplement ses propriétés nom et prenom comme on le ferait avec n'importe quel bean. --%>
-                            <option value="${ mapClients.value.name }">${ mapClients.value.surname } ${ mapClients.value.name }</option>
+                            <option value="${ mapClients.value.name }">${ mapClients.value.firstName } ${ mapClients.value.name }</option>
                             </c:forEach>
                         </select>
                     </div>

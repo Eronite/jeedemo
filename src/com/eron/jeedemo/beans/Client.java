@@ -2,7 +2,7 @@ package com.eron.jeedemo.beans;
 
 public class Client {
 	private String name;
-	private String surname;
+	private String firstName;
 
 	public String getName() {
 		return name;
@@ -12,12 +12,12 @@ public class Client {
 		this.name = name;
 	}
 
-	public String getSurname() {
-		return surname;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 }

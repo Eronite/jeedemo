@@ -9,9 +9,10 @@ import com.eron.jeedemo.beans.Client;
 
 public final class ClientCreationForm {
     private static final String NAME_FIELD       = "clientName";
+    private static final String FIRSTNAME_FIELD  = "clientFirstName";
 
     private String              result;
-    private Map<String, String> errors         = new HashMap<String, String>();
+    private Map<String, String> errors           = new HashMap<String, String>();
 
     public Map<String, String> getErrors() {
         return errors;
@@ -23,6 +24,7 @@ public final class ClientCreationForm {
 
     public Client createClient( HttpServletRequest request ) {
         String name = getFieldValue( request, NAME_FIELD );
+        String firstName = getFieldValue( request, FIRSTNAME_FIELD );
 
         Client client = new Client();
 
@@ -33,6 +35,12 @@ public final class ClientCreationForm {
         }
         client.setName( name );
 
+        try {
+            firstNameValidation( firstName );
+        } catch ( Exception e ) {
+            setError( FIRSTNAME_FIELD, e.getMessage() );
+        }
+        client.setFirstName( firstName );
         
 
         if ( errors.isEmpty() ) {
@@ -54,6 +62,15 @@ public final class ClientCreationForm {
         }
     }
 
+    private void firstNameValidation( String firstName ) throws Exception {
+        if ( firstName != null ) {
+            if ( firstName.length() < 2 ) {
+                throw new Exception( "Le prénom d'utilisateur doit contenir au moins 2 caractères." );
+            }
+        } else {
+            throw new Exception( "Merci d'entrer un prénom d'utilisateur." );
+        }
+    }
 
     /*
      * add a message to errors map (with matching field)

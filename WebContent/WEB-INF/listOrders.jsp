@@ -28,12 +28,12 @@
                 <%-- Simple test de parité sur l'index de parcours, pour alterner la couleur de fond de chaque ligne du tableau. --%>
                 <tr class="${loop.index % 2 == 0 ? 'even' : 'odd'}">
                     <%-- Affichage des propriétés du bean Commande, qui est stocké en tant que valeur de l'entrée courante de la map --%>
-                    <td><c:out value="${ mapOrders.value.client.surname } ${ mapCommandes.value.client.name }"/></td>
+                    <td><c:out value="${ mapOrders.value.client.firstName } ${ mapOrders.value.client.name }"/></td>
                     <td><c:out value="${ mapOrders.value.date }"/></td>
                     <%-- Lien vers la servlet de suppression, avec passage de la date de la commande - c'est-à-dire la clé de la Map - en paramètre grâce à la balise <c:param/>. --%>
                     <td class="action">
                         <a href="<c:url value="/removeOrder"><c:param name="orderDate" value="${ mapOrders.key }" /></c:url>">
-                            <img src="<c:url value="/inc/remove.png"/>" alt="Supprimer" />
+                            <img src="<c:url value="/inc/remove.png"/>" alt="Remove" />
                         </a>
                     </td>
                 </tr>

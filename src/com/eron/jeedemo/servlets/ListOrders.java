@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 public class ListOrders extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	public static final String ORDER_ATTRIBUTE = "commande";
-    public static final String FORM_ATTRIBUTE     = "form";
+	public static final String ORDER_ATTRIBUTE  = "commande";
+    public static final String FORM_ATTRIBUTE   = "form";
 
-    public static final String VUE          = "/WEB-INF/listOrders.jsp";
+    public static final String VUE              = "/WEB-INF/listOrders.jsp";
        
     /**
      * @see HttpServlet#HttpServlet()
