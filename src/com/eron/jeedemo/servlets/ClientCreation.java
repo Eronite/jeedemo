@@ -24,12 +24,12 @@ public class ClientCreation extends HttpServlet {
 	//public static final String NAME_FIELD = "clientName";
 	
 	public static final String CLIENT_ATTRIBUTE = "client";
-	public static final String FORM_ATTRIBUTE = "form";
+	public static final String FORM_ATTRIBUTE   = "form";
 	
-	public static final String CLIENTS_SESSION = "clients";
+	public static final String CLIENTS_SESSION  = "clients";
 	
-	public static final String SUCCESS_VIEW = "/WEB-INF/displayClient.jsp";
-	public static final String FORM_VIEW = "/WEB-INF/createClient.jsp";
+	public static final String SUCCESS_VIEW     = "/WEB-INF/displayClient.jsp";
+	public static final String FORM_VIEW        = "/WEB-INF/createClient.jsp";
        
     /**
      * @see HttpServlet#HttpServlet()

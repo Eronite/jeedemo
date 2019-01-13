@@ -32,7 +32,7 @@
                     <td><c:out value="${ mapOrders.value.date }"/></td>
                     <%-- Lien vers la servlet de suppression, avec passage de la date de la commande - c'est-à-dire la clé de la Map - en paramètre grâce à la balise <c:param/>. --%>
                     <td class="action">
-                        <a href="<c:url value="/removeOrder"><c:param name="orderDate" value="${ mapOrders.key }" /></c:url>">
+                        <a href="<c:url value="/RemoveOrder"><c:param name="orderDate" value="${ mapOrders.key }" /></c:url>">
                             <img src="<c:url value="/inc/remove.png"/>" alt="Remove" />
                         </a>
                     </td>

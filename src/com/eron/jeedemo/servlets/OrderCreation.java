@@ -26,13 +26,13 @@ public class OrderCreation extends HttpServlet {
 	//public static final String DATE_FIELD = "orderDate";
 	
 	public static final String ORDER_ATTRIBUTE = "order";
-	public static final String FORM_ATTRIBUTE = "form";
+	public static final String FORM_ATTRIBUTE  = "form";
 	
-	public static final String CLIENTS_SESSION  = "clients";
-    public static final String ORDERS_SESSION = "orders";
+	public static final String CLIENTS_SESSION = "clients";
+    public static final String ORDERS_SESSION  = "orders";
 	
-	public static final String SUCCESS_VIEW = "/WEB-INF/displayOrder.jsp";
-	public static final String FORM_VIEW = "/WEB-INF/createOrder.jsp";
+	public static final String SUCCESS_VIEW    = "/WEB-INF/displayOrder.jsp";
+	public static final String FORM_VIEW       = "/WEB-INF/createOrder.jsp";
 	
     /**
      * @see HttpServlet#HttpServlet()

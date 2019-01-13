@@ -17,7 +17,7 @@ public class ListClients extends HttpServlet {
 	public static final String CLIENT_ATTRIBUTE = "client";
     public static final String FORM_ATTRIBUTE   = "form";
 
-    public static final String VUE        = "/WEB-INF/listClients.jsp";
+    public static final String VUE              = "/WEB-INF/listClients.jsp";
        
     /**
      * @see HttpServlet#HttpServlet()
