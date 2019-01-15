@@ -55,7 +55,7 @@ public class OrderCreation extends HttpServlet {
 		/* create form object */
         OrderCreationForm form = new OrderCreationForm();
 
-        /* Traitement de la requête et récupération du bean en résultant */
+        /* processes request and gets resulting bean */
         Order order = form.createOrder( request );
 
         /* add bean and form object to request object */
@@ -63,34 +63,33 @@ public class OrderCreation extends HttpServlet {
         request.setAttribute( FORM_ATTRIBUTE, form );
 
         if ( form.getErrors().isEmpty() ) {
-        	/* Alors récupération de la map des clients dans la session */
+        	/* get clients map (in session) */
             HttpSession session = request.getSession();
             Map<String, Client> clients = (HashMap<String, Client>) session.getAttribute( CLIENTS_SESSION );
-            /* Si aucune map n'existe, alors initialisation d'une nouvelle map */
+            /* if no existing map,, creates a new one  */
             if ( clients == null ) {
                 clients = new HashMap<String, Client>();
             }
-            /* Puis ajout du client de la commande courante dans la map */
+            /* add current order's client to map */
             clients.put( order.getClient().getName(), order.getClient() );
-            /* Et enfin (ré)enregistrement de la map en session */
+            /* records map in session */
             session.setAttribute( CLIENTS_SESSION, clients );
  
-            /* Ensuite récupération de la map des commandes dans la session */
+            /* gets order's map (in session) */
             Map<String, Order> orders = (HashMap<String, Order>) session.getAttribute( ORDERS_SESSION );
-            /* Si aucune map n'existe, alors initialisation d'une nouvelle map */
+            /* if no existing map,, creates a new one */
             if ( orders == null ) {
             	orders = new HashMap<String, Order>();
             }
-            /* Puis ajout de la commande courante dans la map */
+            /* add current order to map */
             orders.put( order.getDate(), order );
-            /* Et enfin (ré)enregistrement de la map en session */
+            /* records map (in session) */
             session.setAttribute( ORDERS_SESSION, orders );
 
-            /* Affichage de la fiche récapitulative */
         	
             this.getServletContext().getRequestDispatcher( SUCCESS_VIEW ).forward( request, response );
         } else {
-        	/* Sinon, ré-affichage du formulaire de création avec les erreurs */
+        	/* else display creation form (with errors) */
             this.getServletContext().getRequestDispatcher( FORM_VIEW ).forward( request, response );
         }
 

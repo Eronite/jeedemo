@@ -11,26 +11,26 @@
         <c:import url="/inc/menu.jsp" />
         <div>
         <c:choose>
-            <%-- Si aucun client n'existe en session, affichage d'un message par défaut. --%>
+            <%-- if there is no order in session (orders map empty), display message --%>
             <c:when test="${ empty sessionScope.clients }">
                 <p class="error">Aucun client enregistré.</p>
             </c:when>
-            <%-- Sinon, affichage du tableau. --%>
+            <%-- else display table --%>
             <c:otherwise>
             <table>
                 <tr>
                     <th>Nom</th>
                     <th>Prénom</th>
-                    <th class="action">Action</th>                    
+                    <th class="action"></th>                    
                 </tr>
-                <%-- Parcours de la Map des clients en session, et utilisation de l'objet varStatus. --%>
+                <%-- iteration over orders map (in session), and using varStatus object for counting loops --%>
                 <c:forEach items="${ sessionScope.clients }" var="mapClients" varStatus="loop">
-                <%-- Simple test de parité sur l'index de parcours, pour alterner la couleur de fond de chaque ligne du tableau. --%>
+                <%-- counting loops for css colors (loop.index also works) --%>
                 <tr class="${loop.index % 2 == 0 ? 'even' : 'odd'}">
-                    <%-- Affichage des propriétés du bean Client, qui est stocké en tant que valeur de l'entrée courante de la map --%>
+                    <%-- display Order bean property, stored as current value in mapOrders --%>
                     <td><c:out value="${ mapClients.value.name }"/></td>
                     <td><c:out value="${ mapClients.value.firstName }"/></td>
-                    <%-- Lien vers la servlet de suppression, avec passage du nom du client - c'est-à-dire la clé de la Map - en paramètre grâce à la balise <c:param/>. --%>
+                    <%-- link to removing servlet, with orders's date (key of the map) as parameter (<c:param/> tag) --%>
                     <td class="action">
                         <a href="<c:url value="/RemoveClient"><c:param name="clientName" value="${ mapClients.key }" /></c:url>">
                             <img src="<c:url value="/inc/remove.png"/>" alt="Remove" />

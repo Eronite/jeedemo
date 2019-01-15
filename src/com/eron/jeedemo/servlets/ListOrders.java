@@ -31,7 +31,7 @@ public class ListOrders extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* À la réception d'une requête GET, affichage de la liste des commandes */
+		/* GET : display orders list */
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 	}
 

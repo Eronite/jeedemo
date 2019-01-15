@@ -37,29 +37,26 @@ public class RemoveOrder extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* Récupération du paramètre */
         String orderDate = getParameterValue( request, ORDER_DATE_PARAM );
 
-        /* Récupération de la Map des commandes enregistrées en session */
+        /* get orders map stored in session */
         HttpSession session = request.getSession();
         Map<String, Order> orders = (HashMap<String, Order>) session.getAttribute( ORDERS_SESSION );
 
-        /* Si la date de la commande et la Map des commandes ne sont pas vides */
         if ( orderDate != null && orders != null ) {
-            /* Alors suppression de la commande de la Map */
+            /* remove order from map (key is orderDate) */
             orders.remove( orderDate );
-            /* Et remplacement de l'ancienne Map en session par la nouvelle */
+            /* replace existing map (in session) by the new one */
             session.setAttribute( ORDERS_SESSION, orders );
         }
 
-        /* Redirection vers la fiche récapitulative */
+        /* redirection */
         //response.sendRedirect( request.getContextPath() + VIEW );
         this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
     }
 	
 	/*
-     * Méthode utilitaire qui retourne null si un paramètre est vide, et son
-     * contenu sinon.
+     * returns null if the parameter is empty, or returns its value
      */
     private static String getParameterValue( HttpServletRequest request, String fieldName ) {
         String value = request.getParameter( fieldName );

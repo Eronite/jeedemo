@@ -11,26 +11,26 @@
         <c:import url="/inc/menu.jsp" />
         <div>
         <c:choose>
-            <%-- Si aucune commande n'existe en session, affichage d'un message par défaut. --%>
+            <%-- if there is no order in session (orders map empty), display message --%>
             <c:when test="${ empty sessionScope.orders }">
                 <p class="error">Aucune commande enregistrée.</p>
             </c:when>
-            <%-- Sinon, affichage du tableau. --%>
+            <%-- else display table --%>
             <c:otherwise>
             <table>
                 <tr>
                     <th>Client</th>
                     <th>Date</th>
-                    <th class="action">Action</th>                    
+                    <th class="action"></th>                    
                 </tr>
-                <%-- Parcours de la Map des commandes en session, et utilisation de l'objet varStatus. --%>
+                <%-- iteration over orders map (in session), and using varStatus object for counting loops --%>
                 <c:forEach items="${ sessionScope.orders }" var="mapOrders" varStatus="loop">
-                <%-- Simple test de parité sur l'index de parcours, pour alterner la couleur de fond de chaque ligne du tableau. --%>
-                <tr class="${loop.index % 2 == 0 ? 'even' : 'odd'}">
-                    <%-- Affichage des propriétés du bean Commande, qui est stocké en tant que valeur de l'entrée courante de la map --%>
+                <%-- counting loops for css colors (loop.index also works) --%>
+                <tr class="${loop.count % 2 == 0 ? 'even' : 'odd'}">
+                    <%-- display Order bean property, stored as current value in mapOrders --%>
                     <td><c:out value="${ mapOrders.value.client.firstName } ${ mapOrders.value.client.name }"/></td>
                     <td><c:out value="${ mapOrders.value.date }"/></td>
-                    <%-- Lien vers la servlet de suppression, avec passage de la date de la commande - c'est-à-dire la clé de la Map - en paramètre grâce à la balise <c:param/>. --%>
+                    <%-- link to removing servlet, with orders's date (key of the map) as parameter (<c:param/> tag) --%>
                     <td class="action">
                         <a href="<c:url value="/RemoveOrder"><c:param name="orderDate" value="${ mapOrders.key }" /></c:url>">
                             <img src="<c:url value="/inc/remove.png"/>" alt="Remove" />

@@ -37,29 +37,26 @@ public class RemoveClient extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* Récupération du paramètre */
         String clientName = getParameterValue( request, CLIENT_NAME_PARAM );
 
-        /* Récupération de la Map des clients enregistrés en session */
+        /* get clients map stored in session */
         HttpSession session = request.getSession();
         Map<String, Client> clients = (HashMap<String, Client>) session.getAttribute( CLIENTS_SESSION );
 
-        /* Si le nom du client et la Map des clients ne sont pas vides */
         if ( clientName != null && clients != null ) {
-            /* Alors suppression du client de la Map */
+            /* removes client from map */
             clients.remove( clientName );
-            /* Et remplacement de l'ancienne Map en session par la nouvelle */
+            /* replace existing map (in session) by the new one */
             session.setAttribute( CLIENTS_SESSION, clients );
         }
 
-        /* Redirection vers la fiche récapitulative */
+        /* redirection */
         //response.sendRedirect( request.getContextPath() + VIEW );
         this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
     }
 
     /*
-     * Méthode utilitaire qui retourne null si un paramètre est vide, et son
-     * contenu sinon.
+     * returns null if the parameter is empty, or returns its value
      */
     private static String getParameterValue( HttpServletRequest request, String fieldName ) {
         String value = request.getParameter( fieldName );

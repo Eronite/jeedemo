@@ -51,7 +51,7 @@ public class ClientCreation extends HttpServlet {
 	     /* create form object */
         ClientCreationForm form = new ClientCreationForm();
 
-        /* Traitement de la requête et récupération du bean en résultant */
+        /* processes request and gets resulting bean */
         Client client = form.createClient( request );
 
         /* add bean to request object */
@@ -60,21 +60,21 @@ public class ClientCreation extends HttpServlet {
         request.setAttribute( FORM_ATTRIBUTE, form );
 
         if ( form.getErrors().isEmpty() ) {
-        	/* Alors récupération de la map des clients dans la session */
+        	/* gets clients map (in session) */
             HttpSession session = request.getSession();
             Map<String, Client> clients = (HashMap<String, Client>) session.getAttribute( CLIENTS_SESSION );
-            /* Si aucune map n'existe, alors initialisation d'une nouvelle map */
+            /* if no existing map, creates a new one */
             if ( clients == null ) {
                 clients = new HashMap<String, Client>();
             }
-            /* Puis ajout du client courant dans la map */
+            /* add current client to map */
             clients.put( client.getName(), client );
-            /* Et enfin (ré)enregistrement de la map en session */
+            /* records map in session */
             session.setAttribute( CLIENTS_SESSION, clients );
 
-            /* Affichage de la fiche récapitulative */
             this.getServletContext().getRequestDispatcher( SUCCESS_VIEW ).forward( request, response );
         } else {
+        	/* else display creation form (with errors) */
             this.getServletContext().getRequestDispatcher( FORM_VIEW ).forward( request, response );
         }
 	}
